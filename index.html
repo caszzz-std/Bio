@@ -71,6 +71,19 @@ body {
                  0 0 20px #350e68;
 }
 
+/* con trỏ typing */
+.name::after {
+    content: "|";
+    margin-left: 5px;
+    animation: blinkText 1s infinite;
+}
+
+@keyframes blinkText {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
 /* status */
 .status {
     margin: 15px 0;
@@ -132,7 +145,7 @@ body {
     position: absolute;
     width: 2px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.781);
+    background: rgba(255,255,255,0.8);
     animation: blink 2s infinite alternate;
 }
 
@@ -156,14 +169,13 @@ body {
 
 <img class="avatar" src="https://raw.githubusercontent.com/caszzz-std/eiu/main/T%20-%201.png">
 
-<div class="name">Nguyễn Đình Trí</div>
+<div class="name" id="typingName"></div>
 
 <div class="status">
 ~ 𝖳𝗁𝗈̂𝗇𝗀 𝖳𝗂𝗇 ~<br>
 『𝙾𝚠𝚎𝚛 : 𝖠𝗆𝖾𝗇 𝖲𝗍𝗈𝗋𝖾┇𝟸𝟶𝟸𝟼』
 </div>
 
-<!-- BUTTON A -->
 <a href="https://discord.gg/nQGwFpgC8E" target="_blank" class="btnA">
     𝖠𝗆𝖾𝗇 𝖲𝗍𝗈𝗋𝖾
 </a>
@@ -180,9 +192,9 @@ body {
 
 </div>
 
-<!-- NHẠC (GitHub) -->
+<!-- NHẠC (RAW GitHub) -->
 <audio id="music" autoplay loop>
-    <source src="https://github.com/caszzz-std/eiu/blob/main/YTSave_YouTube_Dung-Nguoi-Dung-Thoi-Diem-Thanh-Hung-Lof_Media_CVQtiFSFzTY_009_128k%20(1).mp3" type="audio/mpeg">
+<source src="https://raw.githubusercontent.com/caszzz-std/eiu/main/YTSave_YouTube_Dung-Nguoi-Dung-Thoi-Diem-Thanh-Hung-Lof_Media_CVQtiFSFzTY_009_128k%20(1).mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -200,11 +212,26 @@ for(let i=0;i<100;i++){
     document.getElementById("stars").appendChild(star);
 }
 
-// view tự tăng
+// view
 let view=localStorage.getItem("view") || 0;
 view++;
 localStorage.setItem("view", view);
 document.getElementById("viewCount").innerText=view;
+
+// ===== TYPEWRITER =====
+const text = "Nguyễn Đình Trí";
+let i = 0;
+let speed = 80;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("typingName").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
+}
+
+typeWriter();
 </script>
 
 </body>
