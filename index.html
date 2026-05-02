@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio xịn</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* nền */
+.bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/caszzz-std/eiu/main/2D%20frame%20by%20frame%20animation%20done%20oi%20Adobe%20Animate%20by%20Ivan%20Boyko.gif') no-repeat center/cover;
+    z-index: -2;
+}
+
+/* blur */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+/* card */
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* avatar */
+.avatar {
+    width: 90px;
+    height: 95px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid white;
+}
+
+/* neon text */
+.name {
+    font-size: 24px;
+    color: #6f00ff;
+    text-shadow: 0 0 5px #9900ff,
+                 0 0 10px #000000,
+                 0 0 20px #350e68;
+}
+
+/* status */
+.status {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5);
+    font-size: 14px;
+}
+
+/* button A */
+.btnA {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 18px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+    box-shadow: 0 0 10px #3c0286;
+}
+
+.btnA:hover {
+    transform: scale(1.1);
+    background: rgba(0,255,204,0.2);
+    box-shadow: 0 0 20px #3b0057;
+}
+
+/* icon */
+.links a {
+    margin: 13px;
+    font-size: 26px;
+    color: white;
+    transition: 0.3s;
+}
+
+.links a:hover {
+    color: #4beb60;
+    text-shadow: 0 0 10px #00b928;
+    transform: scale(1.2);
+}
+
+/* view */
+.views {
+    margin-top: 25px;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* sao */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.781);
+    animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+    from {opacity: 0.2;}
+    to {opacity: 1;}
+}
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="stars" id="stars"></div>
+
+<div class="card">
+
+<img class="avatar" src="https://raw.githubusercontent.com/caszzz-std/eiu/main/T%20-%201.png">
+
+<div class="name">Nguyễn Đình Trí</div>
+
+<div class="status">
+~ 𝖳𝗁𝗈̂𝗇𝗀 𝖳𝗂𝗇 ~<br>
+『𝙾𝚠𝚎𝚛 : 𝖠𝗆𝖾𝗇 𝖲𝗍𝗈𝗋𝖾┇𝟸𝟶𝟸𝟼』
+</div>
+
+<!-- BUTTON A -->
+<a href="https://discord.gg/nQGwFpgC8E" target="_blank" class="btnA">
+    𝖠𝗆𝖾𝗇 𝖲𝗍𝗈𝗋𝖾
+</a>
+
+<div class="links">
+<a href="https://discord.com/users/1471415221078855794"><i class="fab fa-discord"></i></a>
+<a href="https://www.facebook.com/nguyen.inh.tri.480728"><i class="fab fa-facebook"></i></a>
+<a href="https://tiktok.com/@amensupersever"><i class="fab fa-tiktok"></i></a>
+</div>
+
+<div class="views">
+👁 <span id="viewCount">0</span>
+</div>
+
+</div>
+
+<!-- NHẠC (GitHub) -->
+<audio id="music" autoplay loop>
+    <source src="https://github.com/caszzz-std/eiu/blob/main/YTSave_YouTube_Dung-Nguoi-Dung-Thoi-Diem-Thanh-Hung-Lof_Media_CVQtiFSFzTY_009_128k%20(1).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// bật nhạc nếu bị chặn
+document.body.addEventListener("click", () => {
+    document.getElementById("music").play();
+}, { once: true });
+
+// sao
+for(let i=0;i<100;i++){
+    let star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"%";
+    star.style.left=Math.random()*100+"%";
+    document.getElementById("stars").appendChild(star);
+}
+
+// view tự tăng
+let view=localStorage.getItem("view") || 0;
+view++;
+localStorage.setItem("view", view);
+document.getElementById("viewCount").innerText=view;
+</script>
+
+</body>
+</html>
